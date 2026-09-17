@@ -11,3 +11,7 @@
 - Rechecked SS15 map usage.
 - Deckard Journal map now embeds the original AusCraft map page so marker overlays 1–10 and waypoints are preserved.
 - Echo of Tristram uses the same verified Deckard map where relevant.
+
+
+## v19
+- Removed the aggregate Runeword Table image/section from EVENT SS15 > RUNEWORD.
