@@ -1,7 +1,7 @@
-# D4 Sanctuary VN Tracker v14
+# D4 Sanctuary VN Tracker v15
 
-- Sanctuary Alerts chỉ hiển thị giờ sự kiện ở cột phải, không lặp giờ trong mô tả.
-- Giờ hiển thị theo múi giờ Việt Nam (Asia/Ho_Chi_Minh), định dạng 24 giờ.
-- Giờ ở cột phải dùng ExocetBlizzardOT-Medium.
-- Workflow dữ liệu dùng Helltides.com làm nguồn tham chiếu cho lịch tracker khi endpoint khả dụng; giữ dữ liệu gần nhất nếu nguồn tạm thời không phản hồi.
-- Realmwalker đã được loại khỏi Sanctum.
+- SANCTUM renamed to TRACKER EVENT.
+- EVENTS renamed to EVENT SS15.
+- EVENT SS15 contains 3 sub-tabs: Echo of Tristram, Season 15 Secrets, Deckard's Journal Map.
+- Season 15 guide content is adapted/summarized from AusCraft's public Season 15 hub and links back to the original source.
+- Existing v14 tracker, Vietnam-time alerts, assets, and GitHub Pages structure are preserved.
