@@ -9,3 +9,6 @@ GitHub Pages-ready static dashboard.
 - Custom local fonts included in `assets/`.
 
 Upload the whole folder to a GitHub repository and enable GitHub Pages.
+
+
+V8: boss banners use full-width no-distortion fade treatment; Helltide/Legion/Realmwalker include dark artwork backgrounds.
