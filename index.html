@@ -81,7 +81,19 @@
 .sanctum-classic .realm strong{font-family:'ExocetBlizzard',Georgia,serif!important;color:#ef4943}
 @media(max-width:650px){.sanctum-classic .grid2{grid-template-columns:1fr}.sanctum-classic .realm{gap:10px;align-items:flex-start;flex-direction:column}}
 </style>
-</head><body><main class="shell"><header class="header"><div class="brand">D4 Sanctuary VN Tracker</div><div class="seasonline">Season 15 · <b>Season of Hell's Legacy</b> · Giờ Việt Nam UTC+7</div><div class="top-actions"><button class="bell" id="bell" aria-label="Thông báo">🔔</button></div><div class="notify-status" id="notifyText">◆ THÔNG BÁO ĐANG TẮT</div></header>
+<style>
+/* FINAL cinematic layout */
+.shell{width:min(1180px,100%);background:linear-gradient(#0b0504ee,#070707f7)}
+.header{padding:18px 24px 8px}.brand{font-size:38px}.nav{justify-content:center}
+.boss{min-height:190px!important;display:flex;flex-direction:column;justify-content:center;background-color:#111!important;background-size:cover!important;background-position:center!important;isolation:isolate}
+.boss:after{content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;background:linear-gradient(90deg,rgba(8,8,9,.96) 0%,rgba(8,8,9,.74) 38%,rgba(8,8,9,.35) 70%,rgba(20,4,2,.68) 100%)!important;pointer-events:none}
+.boss .eyebrow,.boss .countdown,.boss .boss-meta{position:relative;z-index:2}.boss .countdown{font-size:50px!important;text-shadow:0 2px 3px #000,0 0 10px #7a210f}.boss .boss-meta{color:#f1e8db;text-shadow:0 1px 3px #000}
+.event{background:linear-gradient(110deg,#141517,#101113 65%,#1b0d0b)}
+.season-count-panel{position:relative;overflow:hidden;isolation:isolate;background:#120b09}.season-count-panel:before{content:"";position:absolute;inset:0;z-index:-2;background:url('./assets/season15.webp') center 47%/cover no-repeat;opacity:.38}.season-count-panel:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,8,8,.96) 0%,rgba(10,8,8,.78) 48%,rgba(20,5,3,.55) 100%)}
+.season-left small{color:#e3d5c0}.season-est{color:#a79a8a}
+.bell{width:48px;height:44px;padding:0;font-size:20px;background:linear-gradient(#2b0b08,#160706);border-color:#8f281d;box-shadow:inset 0 0 12px #000}
+@media(max-width:650px){.boss{min-height:165px!important}.boss .countdown{font-size:38px!important}}
+</style></head><body><main class="shell"><header class="header"><div class="brand">D4 Sanctuary VN Tracker</div><div class="seasonline">Season 15 · <b>Season of Hell's Legacy</b> · Giờ Việt Nam UTC+7</div><div class="top-actions"><button class="bell" id="bell" aria-label="Thông báo">🔔</button></div><div class="notify-status" id="notifyText">◆ THÔNG BÁO ĐANG TẮT</div></header>
 <nav class="nav"><button class="active" data-page="sanctum">SANCTUM</button><button data-page="tracker">THÔNG TIN UPDATE</button><button data-page="events">EVENTS</button><button data-page="season">SEASON</button></nav>
 <section class="content"><div id="error" class="error"></div>
 <section class="page active" id="sanctum">
@@ -118,7 +130,8 @@ function renderSeasonCountdown(now=Date.now()){
 function fmt(t){return new Intl.DateTimeFormat('vi-VN',{timeZone:TZ,weekday:'short',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(t))}
 function dur(ms){if(ms<0)return'00:00:00';let s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60);return [h,m,s%60].map(x=>String(x).padStart(2,'0')).join(':')}
 async function load(){try{let [a,b]=await Promise.all([fetch('data/events.json?'+Date.now()),fetch('data/news.json?'+Date.now())]);DATA=await a.json();NEWS=await b.json();render();}catch(e){$('#error').style.display='block';$('#error').textContent='Không đọc được data/*.json. Nếu mở file trực tiếp, hãy chạy bằng GitHub Pages hoặc local server.'}}
-function render(){let now=Date.now();renderSeasonCountdown(now);let boss=(DATA.world_boss||[]).find(x=>new Date(x.time)>now)||DATA.world_boss?.[0];if(boss){$('#bossName').textContent=boss.name||'WORLD BOSS';$('#bossCd').textContent=dur(new Date(boss.time)-now);$('#bossMeta').textContent=`${boss.location} · ${fmt(boss.time)}`} 
+function bossArt(name=''){let n=name.toLowerCase();if(n.includes('ashava'))return './assets/bosses/ashava.webp';if(n.includes('avarice'))return './assets/bosses/avarice.webp';if(n.includes('wandering'))return './assets/bosses/wandering-death.webp';if(n.includes('azmodan'))return './assets/bosses/azmodan.webp';return '';}
+function render(){let now=Date.now();renderSeasonCountdown(now);let boss=(DATA.world_boss||[]).find(x=>new Date(x.time)>now)||DATA.world_boss?.[0];if(boss){$('#bossName').textContent=boss.name||'WORLD BOSS';$('#bossCd').textContent=dur(new Date(boss.time)-now);$('#bossMeta').textContent=`${boss.location} · ${fmt(boss.time)}`;let art=bossArt(boss.name||'');$('.boss').style.backgroundImage=art?`url('${art}')`:'none'} 
 let minute=new Date().getMinutes(), sec=new Date().getSeconds();let hellActive=minute<55, hellRemain=hellActive?((55-minute)*60-sec)*1000:((60-minute)*60-sec)*1000;$('#hellState').textContent=hellActive?'HELLTIDE RAGES':'HELLTIDE RESTS';$('#hellMeta').textContent=(hellActive?'Kết thúc sau ':'Bắt đầu sau ')+dur(hellRemain);
 let next25=25-(minute%25);$('#legionState').textContent='Gathering in '+dur((next25*60-sec)*1000);$('#legionMeta').textContent='Chu kỳ hiển thị 25 phút';let next15=15-(minute%15);$('#realmState').textContent='Rises in '+dur((next15*60-sec)*1000);$('#updated').textContent='Cập nhật dữ liệu: '+fmt(DATA.updated_at)+' · UTC+7';renderPosts();renderSchedule();setTimeout(render,1000)}
 function card(p){return `<article class="plate post" data-kind="${p.kind||'community'}"><div class="meta"><span class="tag">${p.author||'Blizzard'}</span> · ${p.source||'Diablo IV'} · ${p.published?fmt(p.published):''}</div><h2>${esc(p.title)}</h2><p>${esc(p.summary||'')}</p><a href="${p.url}" target="_blank" rel="noopener">VIEW SOURCE</a><div style="clear:both"></div></article>`}
