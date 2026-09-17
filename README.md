@@ -1,5 +1,7 @@
-# D4 Sanctuary VN Tracker v12
+# D4 Sanctuary VN Tracker v14
 
-- Sanctuary Alerts hiển thị giờ sự kiện theo giờ Việt Nam (Asia/Ho_Chi_Minh, UTC+7) thay vì timestamp lúc render.
-- Sửa font số giờ và khoảng cách đáy để alert cuối không chạm/cắt viền.
-- Giữ nguyên 4 banner boss do người dùng cung cấp và layout không Realmwalker.
+- Sanctuary Alerts chỉ hiển thị giờ sự kiện ở cột phải, không lặp giờ trong mô tả.
+- Giờ hiển thị theo múi giờ Việt Nam (Asia/Ho_Chi_Minh), định dạng 24 giờ.
+- Giờ ở cột phải dùng ExocetBlizzardOT-Medium.
+- Workflow dữ liệu dùng Helltides.com làm nguồn tham chiếu cho lịch tracker khi endpoint khả dụng; giữ dữ liệu gần nhất nếu nguồn tạm thời không phản hồi.
+- Realmwalker đã được loại khỏi Sanctum.
